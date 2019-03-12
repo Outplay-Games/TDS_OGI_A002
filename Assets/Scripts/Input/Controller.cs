@@ -5,12 +5,16 @@ using UnityEngine;
 public class Controller : MonoBehaviour {
 
 	public GameObject characterObject;
+	public CameraBehavior cameraBehavior;
 	public Camera camera;
 	public LayerMask rayMask;
+	public float scrollSpeed;
 
 	private Character m_character;
 	private Ray m_ray;
 	private RaycastHit hit;
+
+	private float m_mouseScroll;
 
 	// Start is called before the first frame update
 	void Start() {
@@ -19,9 +23,24 @@ public class Controller : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
+
+		m_mouseScroll = Input.GetAxis("Mouse ScrollWheel");
+
+		if (cameraBehavior) {
+			cameraBehavior.Scroll(m_mouseScroll * scrollSpeed);
+		}
+
 		if (characterObject) {
 			if (!m_character) {
 				m_character = characterObject.GetComponent<Character>();
+			}
+
+			if (Input.GetKey(KeyCode.Mouse0)) {
+				m_character.Shoot();
+			}
+
+			if (Input.GetKeyDown(KeyCode.R)) {
+				m_character.Reload();
 			}
 
 			float x = Input.GetAxisRaw("Horizontal");

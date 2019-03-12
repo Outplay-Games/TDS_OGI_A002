@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
+
+
 	public float movementSpeed = 1f;
+	public Weapon m_weapon;
 
 	GameObject m_BodyObject;
 	Rigidbody m_Rigidbody;
@@ -28,6 +31,21 @@ public class Character : MonoBehaviour {
 	}
 
 	public void LookAt(Vector3 point) {
-		m_BodyObject.transform.LookAt(new Vector3(point.x, 0.5f, point.z));
+		//m_BodyObject.transform.LookAt(new Vector3(point.x, 0.5f, point.z));
+		var offset = new Vector2(point.x - transform.position.x, point.z - transform.position.z);
+		var angle = Mathf.Atan2(offset.x, offset.y) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.Euler(0, angle, 0);
+	}
+
+	public void Shoot() {
+		if (m_weapon) {
+			m_weapon.Fire();
+		}
+	}
+
+	public void Reload() {
+		if (m_weapon) {
+			m_weapon.Reload();
+		}
 	}
 }
