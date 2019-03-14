@@ -11,7 +11,7 @@ public class Character : MonoBehaviour {
 
 	GameObject m_BodyObject;
 	Rigidbody m_Rigidbody;
-	Vector3 velocity = new Vector3(0f, 0f, 0f);
+	Vector3 m_Velocity = new Vector3(0f, 0f, 0f);
 	Vector3 m_EulerAngleVelocity;
 
 	void Start() {
@@ -24,9 +24,9 @@ public class Character : MonoBehaviour {
 
 	public void Move(float x, float z) {
 		if (m_Rigidbody) {
-			velocity.Set(x, 0f, z);
-			velocity = velocity.normalized * movementSpeed * Time.deltaTime;
-			m_Rigidbody.MovePosition(transform.position + velocity);
+			m_Velocity.Set(x, 0f, z);
+			m_Velocity = m_Velocity.normalized * movementSpeed * Time.deltaTime;
+			m_Rigidbody.MovePosition(transform.position + m_Velocity);
 		}
 	}
 

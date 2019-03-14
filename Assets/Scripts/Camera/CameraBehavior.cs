@@ -8,8 +8,6 @@ public class CameraBehavior : MonoBehaviour {
 	public GameObject followedCharacter;
 	public Vector3 offset;
 
-	private float m_lerpSpeed = 20f;
-
 	// Start is called before the first frame update
 	void Start() {
 		transform.position = offset;
