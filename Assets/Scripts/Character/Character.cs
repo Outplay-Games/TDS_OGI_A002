@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
-
+	public int health = 100;
 
 	public float movementSpeed = 1f;
 	public Weapon m_weapon;
+	public GameObject flashLight;
+	public bool IsDead = false;
 
 	GameObject m_BodyObject;
 	Rigidbody m_Rigidbody;
@@ -47,5 +49,23 @@ public class Character : MonoBehaviour {
 		if (m_weapon) {
 			m_weapon.Reload();
 		}
+	}
+
+	public void ToggleFlashlight() {
+		flashLight.SetActive(!flashLight.activeSelf);
+	}
+
+	public void TakeDamage(int amount, Vector3 direction) {
+		m_Rigidbody.AddForce(direction * 250f, ForceMode.Impulse);
+		if (health <= 0) {
+			Die();
+		}
+		Debug.Log(gameObject.name + " taking damage!");
+		health -= amount;
+	}
+
+	public void Die() {
+		IsDead = true;
+		m_Rigidbody.isKinematic = false;
 	}
 }

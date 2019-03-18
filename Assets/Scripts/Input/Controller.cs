@@ -43,6 +43,10 @@ public class Controller : MonoBehaviour {
 				m_character.Reload();
 			}
 
+			if (Input.GetKeyDown(KeyCode.E)) {
+				m_character.ToggleFlashlight();
+			}
+
 			float x = Input.GetAxisRaw("Horizontal");
 			float z = Input.GetAxisRaw("Vertical");
 

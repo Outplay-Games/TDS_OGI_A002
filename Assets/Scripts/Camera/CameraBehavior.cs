@@ -22,7 +22,8 @@ public class CameraBehavior : MonoBehaviour {
 
 	public void Scroll(float scroll) {
 		Vector3 pos = transform.position;
-		transform.position = new Vector3(pos.x, pos.y + scroll, pos.z);
+		float clampedY = Mathf.Clamp(pos.y + scroll, 8f, 20f);
+		transform.position = new Vector3(pos.x, clampedY, pos.z);
 		//transform.position = Vector3.Lerp(transform.position, new Vector3(pos.x, pos.y + scroll, pos.z), Time.deltaTime * m_lerpSpeed);
 	}
 }

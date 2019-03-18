@@ -21,6 +21,7 @@ public class Magazine {
 
 	public Magazine(int magSize) {
 		this.m_magSize = magSize;
+		Reload();
 	}
 
 	public void Reload() {
